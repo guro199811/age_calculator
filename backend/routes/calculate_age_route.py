@@ -111,7 +111,7 @@ def calculate_age():
         # Calculate main components
         years, months = calculate_years_and_months(birth_datetime, now)
         hours, minutes, seconds = calculate_remaining_time(birth_datetime, now, years, months)
-        
+
         # Format detailed age string
         detailed_age = format_detailed_age(years, months, hours, minutes, seconds)
 

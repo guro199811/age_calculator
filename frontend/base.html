@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Age Calculator</h1>
+    <form method="POST" action="/calculate_age">
+        <div class="input-group">
+            <label for="birthdate">Birth Date:</label>
+            <input type="date" id="birthdate" name="birthdate" required>
+        </div>
+        <div class="input-group">
+            <label for="birthtime">Birth Time (optional):</label>
+            <input type="time" id="birthtime" name="birthtime" value="09:00">
+        </div>
+        <button type="submit">Calculate Age</button>
+    </form>
+
+    {% if error %}
+    <div class="error">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    {% if detailed_age %}
+    <div class="result">
+        <h2>Detailed Age:</h2>
+        <p>You are {{ detailed_age }} old</p>
+        
+        <h3>Other Age Representations:</h3>
+        <ul>
+            <li>Age in years: {{ age }}</li>
+            <li>Age in months: {{ age_in_months }}</li>
+            <li>Age in weeks: {{ age_in_weeks }}</li>
+            <li>Age in days: {{ age_in_days }}</li>
+            <li>Age in hours: {{ age_in_hours }}</li>
+            <li>Age in minutes: {{ age_in_minutes }}</li>
+            <li>Age in seconds: {{ age_in_seconds }}</li>
+        </ul>
+    </div>
+    {% endif %}
+
+    {% block history %}
+        {% if history %}
+            <ul>
+                {% for entry in history %}
+                    <li>{{ entry }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No calculation history available.</p>
+        {% endif %}
+    {% endblock %}
+</body>
+</html>
