@@ -3,15 +3,26 @@
 block_cipher = None
 
 a = Analysis(
-    ['gui_main.py'],
+    ['../backend/gui_main.py'],
     pathex=[],
     binaries=[],
     datas=[
         ('../frontend', 'frontend'),
-        ('database', 'database'),
+        ('../backend/database', 'database'),
         ('../frontend/static', 'frontend/static'),
     ],
-    hiddenimports=['flask', 'flaskwebgui', 'sqlalchemy'],
+    hiddenimports=[
+        'flask',
+        'flask_cors',
+        'flaskwebgui',
+        'sqlalchemy',
+        'flask_sqlalchemy',
+        'sqlalchemy.orm',
+        'sqlalchemy.ext.declarative',
+        'sqlalchemy.sql.default_comparator',
+        'werkzeug',
+        'jinja2'
+    ],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -38,11 +49,11 @@ exe = EXE(
     upx=True,
     upx_exclude=[],
     runtime_tmpdir=None,
-    console=False,
+    console=False,  # Set to True to see any errors
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['./icon.png']
+    icon=['./icon.ico']
 )
