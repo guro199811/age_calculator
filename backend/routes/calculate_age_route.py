@@ -1,7 +1,5 @@
 from flask import Blueprint, request, render_template
 from datetime import datetime
-from sqlalchemy import desc
-
 from models.history import History
 from db import db
 
@@ -122,7 +120,7 @@ def calculate_age():
 
         # Save calculation to history
         save_to_history(None, age_data)
-        
+
         # Get context from base route logic to show history
         context = db.session.execute(
             db.select(History).order_by(History.id.desc()).limit(10)
@@ -138,7 +136,7 @@ def calculate_age():
         return render_template(
             "base.html",
             error="Invalid date/time format. Use YYYY-MM-DD for date and HH:MM for time.",
-            context=context
+            context=context,
         )
 
 
