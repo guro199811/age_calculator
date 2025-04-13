@@ -4,13 +4,18 @@ from db import Base
 from datetime import datetime
 
 
+def get_formatted_datetime():
+    """Return current datetime formatted without microseconds"""
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
 class History(Base):
     __tablename__ = "history"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     country: Mapped[str] = mapped_column(nullable=True)
     data: Mapped[dict] = mapped_column(JSON, nullable=False)
-    created_at: Mapped[str] = mapped_column(default=datetime.now)
+    created_at: Mapped[str] = mapped_column(default=get_formatted_datetime)
 
     def __str__(self):
         return (
