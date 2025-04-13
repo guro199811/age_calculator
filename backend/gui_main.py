@@ -4,4 +4,4 @@ from flaskwebgui import FlaskUI
 
 if __name__ == "__main__":
     app = create_app()
-    FlaskUI(app=app, width=800, height=600, server="flask").run()
+    FlaskUI(app=app, width=600, height=800, server="flask").run()
